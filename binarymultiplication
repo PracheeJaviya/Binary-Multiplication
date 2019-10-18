@@ -1,0 +1,32 @@
+final(0, _, 0):- !.
+final(_, 0, 0):- !.
+final(G, H, S):-
+    A is 1,
+    binary(G, H, A, List),
+    sum(List, S).
+    
+binary(X, Y, Z, [H,I|T]):-
+    D is mod(Y, 10),
+    B is X*Z,
+    binaryproduct(D, B, H),
+    A is (Y-D)/10,        
+	F is Z*10,
+	binary(B, A, F, [I|T]).
+
+binary(_, 0, _, List):-
+    sum(List, 0).
+
+binaryproduct(1, B, H):-
+    H is B.
+binaryproduct(0, _, H):-
+    H is 0.
+
+sum([],0).
+
+sum([Head|Tail], TotalSum):-
+    sum(Tail, Sum1),
+	TotalSum is Head+Sum1.
+
+check(H1,H2,C):-
+(    h1>h2 -> c=h1; c=h2),
+write(c).
